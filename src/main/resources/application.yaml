@@ -1,0 +1,67 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: langChan4jDemo
+    version: 1.0.0
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      url: jdbc:mysql://localhost:3306/classroomcentre?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+      username: root
+      password: ENC(bU1WBa90bnGcWZiHRQ56PQ==)
+      driverClassName: com.mysql.cj.jdbc.Driver
+      initial-size: 5
+      max-active: 20
+      min-idle: 5
+      max-wait: 60000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      validation-query: SELECT 1 FROM DUAL
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: true
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      filters: stat,wall
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        loginUsername: admin
+        loginPassword: 123456
+
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 8
+      lettuce:
+        pool:
+          max-idle: 16
+          max-active: 32
+          min-idle: 8
+
+redisson:
+  singleServerConfig:
+    address: redis://localhost:6379
+
+jasypt:
+  encryptor:
+    password: huliua
+    algorithm: PBEWithMD5AndDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator # 重点，默认的iv生成器会生成一个随机的iv，每次加密的iv都不一样，导致解密失败
+
+
+langchain4j:
+  open-ai:
+    chat-model:
+      model-name: deepseek-r1:7b
+      log-requests: true
+      log-responses: true
+      base-url: http://localhost:11434/v1
+      api-key: anything
+
+logging:
+  level:
+    dev.langchain4j: debug
