@@ -69,6 +69,6 @@ langchain4j:
       base-url: http://localhost:11434/v1
       api-key: anything
 
-logging:
-  level:
-    dev.langchain4j: debug
+#logging:
+#  level:
+#    dev.langchain4j: debug
