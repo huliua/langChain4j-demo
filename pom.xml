@@ -85,14 +85,22 @@
             <artifactId>lombok</artifactId>
         </dependency>
 
+        <!--引入langchain4j相关依赖-->
         <dependency>
             <groupId>dev.langchain4j</groupId>
             <artifactId>langchain4j-open-ai-spring-boot-starter</artifactId>
             <version>${langchain4j.version}</version>
         </dependency>
+        <!--引入aiService相关依赖-->
         <dependency>
             <groupId>dev.langchain4j</groupId>
             <artifactId>langchain4j-spring-boot-starter</artifactId>
+            <version>${langchain4j.version}</version>
+        </dependency>
+        <!--引入流式调用相关依赖-->
+        <dependency>
+            <groupId>dev.langchain4j</groupId>
+            <artifactId>langchain4j-reactor</artifactId>
             <version>${langchain4j.version}</version>
         </dependency>
     </dependencies>

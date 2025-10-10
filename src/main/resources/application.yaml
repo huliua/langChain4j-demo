@@ -61,6 +61,13 @@ langchain4j:
       log-responses: true
       base-url: http://localhost:11434/v1
       api-key: anything
+    # 流式聊天模型
+    streaming-chat-model:
+      model-name: deepseek-r1:7b
+      log-requests: true
+      log-responses: true
+      base-url: http://localhost:11434/v1
+      api-key: anything
 
 logging:
   level:

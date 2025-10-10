@@ -1,19 +1,25 @@
 package com.huliua.langChain4j.controller;
 
-import dev.langchain4j.model.openai.OpenAiChatModel;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.huliua.langChain4j.aiservice.AiChatService;
+import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
 
 @RestController
 public class ChatController {
 
-    @Autowired
-    private OpenAiChatModel chatModel;
+    @Resource
+    private AiChatService aiChatService;
 
     @RequestMapping("/chat")
-    public String chat(@RequestParam(name = "message", required = true) String message) {
-        return chatModel.chat(message);
+    public String chat(@RequestParam(name = "message") String message) {
+        return aiChatService.chat(message);
+    }
+
+    @RequestMapping(value = "/streamChat", produces = "text/html;charset=utf8")
+    public Flux<String> streamChat(@RequestParam(name = "memoryId") String memoryId, @RequestParam(name = "message") String message) {
+        return aiChatService.chatStream(memoryId, message);
     }
 }
