@@ -1,6 +1,8 @@
 server:
   port: 8080
 spring:
+  profiles:
+    active: local
   application:
     name: langChan4jDemo
     version: 1.0.0
@@ -48,7 +50,7 @@ redisson:
 
 jasypt:
   encryptor:
-    password: huliua
+    password: your_password
     algorithm: PBEWithMD5AndDES
     iv-generator-classname: org.jasypt.iv.NoIvGenerator # 重点，默认的iv生成器会生成一个随机的iv，每次加密的iv都不一样，导致解密失败
 
