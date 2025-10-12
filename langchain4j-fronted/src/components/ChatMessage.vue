@@ -15,16 +15,27 @@
         </el-avatar>
       </div>
       <div class="message-bubble">
-        <div class="message-text">{{ content }}</div>
+        <template v-if="isUser">
+          <!-- 用户消息直接显示 -->
+          <div class="message-text">{{ content }}</div>
+        </template>
+        <template v-else>
+          <!-- AI消息需要分离思考过程和正式回复 -->
+          <thinking-process 
+            v-if="thinkingContent" 
+            :content="thinkingContent" 
+          />
+          <div class="message-text">{{ normalContent }}</div>
+        </template>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import {computed} from 'vue';
-import {Service, UserFilled} from '@element-plus/icons-vue';
-
+import { computed } from 'vue';
+import { Service, UserFilled } from '@element-plus/icons-vue';
+import ThinkingProcess from './ThinkingProcess.vue';
 
 const props = defineProps({
   role: {
@@ -39,6 +50,32 @@ const props = defineProps({
 });
 
 const isUser = computed(() => props.role === 'user');
+
+// 提取思考过程内容
+const thinkingContent = computed(() => {
+  // 如果有结束标签，就展示标签之内的内容
+  if (props.content.indexOf('</think>') > -1) {
+    const thinkingMatch = props.content.match(/<think>([\s\S]*?)<\/think>/);
+    return thinkingMatch ? thinkingMatch[1] : '';
+  } else if (props.content.startsWith('<think>')) {
+    // 如果没有结束标签，就展示从开始标签到结尾的内容
+    const thinkingMatch = props.content.match(/<think>([\s\S]*)/);
+    return thinkingMatch ? thinkingMatch[1] : '';
+  } else {
+    return '';
+  }
+});
+
+// 提取正常回复内容
+const normalContent = computed(() => {
+  if (props.content.startsWith('<think>') ) {
+    if (props.content.indexOf('</think>') > -1) {
+      return props.content.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
+    }
+    return '思考中......';
+  }
+  return props.content;
+});
 </script>
 
 <style scoped>
