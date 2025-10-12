@@ -2,6 +2,7 @@ package com.huliua.langChain4j.controller;
 
 import com.huliua.langChain4j.aiservice.AiChatService;
 import jakarta.annotation.Resource;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,8 +19,8 @@ public class ChatController {
         return aiChatService.chat(message);
     }
 
-    @RequestMapping(value = "/streamChat", produces = "text/html;charset=utf8")
-    public Flux<String> streamChat(@RequestParam(name = "memoryId") String memoryId, @RequestParam(name = "message") String message) {
+    @PostMapping(value = "/streamChat", produces = "text/html;charset=utf8")
+    public Flux<String> streamChat(String memoryId, String message) {
         return aiChatService.chatStream(memoryId, message);
     }
 }
