@@ -6,7 +6,7 @@ const baseURL = '/api'
 // 创建axios实例
 const api = axios.create({
     baseURL,
-    timeout: 60000, // 设置较长的超时时间，因为流式响应可能需要更长时间
+    timeout: 300000, // 设置较长的超时时间，因为流式响应可能需要更长时间
     headers: {
         'Content-Type': 'application/json'
     },
