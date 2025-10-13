@@ -47,10 +47,12 @@ export const useChatStore = defineStore('chat', () => {
             // 处理每个数据块的回调函数
             const handleChunk = (chunk) => {
                 // 解析数据
-                const lines = chunk.split('\n');
-                for (const line of lines) {
-                    if (line.startsWith('data:')) {
-                        aiResponse += line.split(':')[1] || '';
+                const lines = chunk.replaceAll("data:", '').split('\n\n');
+                for (let i = 0; i < lines.length; i++) {
+                    if (lines[i].length > 0) {
+                        aiResponse += lines[i];
+                    } else if (i !== lines.length - 1) {
+                        aiResponse += "\n";
                     }
                 }
                 // 更新最后一条消息（AI回复）

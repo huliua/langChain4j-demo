@@ -25,7 +25,9 @@
             v-if="thinkingContent" 
             :content="thinkingContent" 
           />
-          <div class="message-text">{{ normalContent }}</div>
+          <div class="message-text">
+            <MarkdownRenderer :content="normalContent"/>
+          </div>
         </template>
       </div>
     </div>
@@ -33,9 +35,11 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import { Service, UserFilled } from '@element-plus/icons-vue';
+import {computed} from 'vue';
+import {Service, UserFilled} from '@element-plus/icons-vue';
 import ThinkingProcess from './ThinkingProcess.vue';
+import MarkdownRenderer from './MarkdownRenderer.vue';
+
 
 const props = defineProps({
   role: {
@@ -127,8 +131,30 @@ const normalContent = computed(() => {
 }
 
 .message-text {
+  white-space: pre-wrap;
   line-height: 1.8;
   font-size: 15px;
   text-align: left;
+}
+
+
+/* 如果需要覆盖 MarkdownRenderer 的某些样式 */
+.message-text :deep(.markdown-content) {
+  /* 调整内边距以匹配消息框 */
+  padding: 0;
+  margin: 0;
+}
+
+/* 调整代码块样式以适应消息框 */
+.message-text :deep(pre) {
+  margin: 8px 0;
+  background-color: #f8f9fa;
+}
+
+/* 调整行内代码样式 */
+.message-text :deep(code) {
+  background-color: #e9ecef;
+  padding: 2px 4px;
+  border-radius: 3px;
 }
 </style>
