@@ -47,17 +47,10 @@ export const useChatStore = defineStore('chat', () => {
             // 处理每个数据块的回调函数
             const handleChunk = (chunk) => {
                 // 解析数据
-                const lines = chunk.replaceAll("data:", '').split('\n\n');
-                for (let i = 0; i < lines.length; i++) {
-                    if (lines[i].length > 0) {
-                        aiResponse += lines[i];
-                    } else if (i !== lines.length - 1) {
-                        aiResponse += "\n";
-                    }
-                }
+                aiResponse += chunk.replaceAll('data:', '').replaceAll('\n\n\n\n\n', '\n').replaceAll('\n\n\n\n', '\n').replaceAll('\n\n', '');
                 // 更新最后一条消息（AI回复）
                 if (lastIndex >= 0 && messages.value[lastIndex].role === 'ai') {
-                    messages.value[lastIndex].content = aiResponse
+                    messages.value[lastIndex].content = aiResponse;
                 }
             }
 
