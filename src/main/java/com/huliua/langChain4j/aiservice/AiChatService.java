@@ -7,10 +7,11 @@ import dev.langchain4j.service.spring.AiService;
 import dev.langchain4j.service.spring.AiServiceWiringMode;
 import reactor.core.publisher.Flux;
 
-@AiService(wiringMode = AiServiceWiringMode.EXPLICIT,
-        chatModel = "openAiChatModel", // 配置阻塞聊天模型
+@AiService(wiringMode = AiServiceWiringMode.EXPLICIT, // 手动指定模型
+        // chatModel = "openAiChatModel", // 配置阻塞聊天模型
         streamingChatModel = "openAiStreamingChatModel", // 配置流式聊天模型
-        chatMemoryProvider = "chatMemoryProvider" // 会话记忆提供器
+        chatMemoryProvider = "chatMemoryProvider", // 会话记忆提供器
+        contentRetriever = "contentRetriever" // 内容检索器
 )
 public interface AiChatService {
     String chat(String question);

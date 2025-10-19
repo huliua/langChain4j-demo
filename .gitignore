@@ -33,4 +33,5 @@ build/
 .vscode/
 
 ### 本地的配置文件，防止密码等私密信息泄露 ###
-/src/main/resources/application-local.yaml
+src/main/resources/application-local.yaml
+src/main/resources/docs
