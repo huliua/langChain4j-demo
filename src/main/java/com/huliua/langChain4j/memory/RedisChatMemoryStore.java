@@ -1,4 +1,4 @@
-package com.huliua.langChain4j.store;
+package com.huliua.langChain4j.memory;
 
 import dev.langchain4j.data.message.ChatMessage;
 import dev.langchain4j.data.message.ChatMessageDeserializer;
