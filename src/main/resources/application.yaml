@@ -74,6 +74,7 @@ langchain4j:
       base-url: http://localhost:11434/v1
       api-key: anything
       model-name: dengcao/Qwen3-Embedding-4B:Q4_K_M
+      max-segments-per-batch: 10
 
 logging:
   level:
