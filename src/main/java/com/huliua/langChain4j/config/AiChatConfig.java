@@ -1,6 +1,7 @@
 package com.huliua.langChain4j.config;
 
 import com.huliua.langChain4j.aiservice.AiChatService;
+import com.huliua.langChain4j.tools.MyRedisTool;
 import dev.langchain4j.mcp.McpToolProvider;
 import dev.langchain4j.memory.chat.ChatMemoryProvider;
 import dev.langchain4j.model.chat.StreamingChatModel;
@@ -25,6 +26,9 @@ public class AiChatConfig {
     @Resource
     private McpToolProvider mcpToolProvider;
 
+    @Resource
+    private MyRedisTool myRedisTool;
+
     /**
      * 创建一个AiChatService
      * 简单方式使用@AiService注解
@@ -36,6 +40,7 @@ public class AiChatConfig {
                 .chatMemoryProvider(chatMemoryProvider) // 会保存聊天记录
                 .contentRetriever(contentRetriever) // 内容检索器
                 .toolProvider(mcpToolProvider)
+                .tools(myRedisTool)
                 .build();
     }
 }
