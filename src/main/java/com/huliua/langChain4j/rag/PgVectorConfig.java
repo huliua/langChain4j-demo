@@ -1,4 +1,4 @@
-package com.huliua.langChain4j.config;
+package com.huliua.langChain4j.rag;
 
 import dev.langchain4j.model.embedding.EmbeddingModel;
 import dev.langchain4j.store.embedding.pgvector.PgVectorEmbeddingStore;
