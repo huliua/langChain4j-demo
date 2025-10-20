@@ -31,7 +31,7 @@
           :rows="3"
           placeholder="请输入您的问题..."
           resize="none"
-          @keydown.enter.prevent="handleEnter"
+          @keydown.enter="handleEnter"
       />
       <div class="chat-actions">
         <el-button @click="clearInput" plain>
@@ -97,9 +97,7 @@ const handleEnter = (e) => {
   if (e.ctrlKey || e.metaKey) {
     // Ctrl+Enter 或 Cmd+Enter 发送消息
     sendMessage();
-  } else {
-    // 普通回车换行
-    userInput.value += '\n';
+    e.preventDefault();
   }
 };
 
